@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دقيقة الترشيد - جامعة مدينة السادات الأهلية</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a227;
+    --gold-light: #f0c040;
+    --gold-dark: #8a6a00;
+    --teal: #0a7c6e;
+    --teal-light: #12a898;
+    --dark: #06130f;
+    --dark2: #0b2018;
+    --dark3: #0f2d20;
+    --white: #f5f0e8;
+    --cream: #fdf6e3;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated background */
+  .bg-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: radial-gradient(ellipse at 20% 50%, #0a2a1e 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, #0d3525 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 90%, #071a12 0%, transparent 60%),
+                linear-gradient(160deg, #040e0a 0%, #081a12 40%, #06130f 100%);
+  }
+
+  .bg-canvas::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(201,162,39,0.08) 1px, transparent 0);
+    background-size: 40px 40px;
+    animation: gridMove 20s linear infinite;
+  }
+
+  @keyframes gridMove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(40px); }
+  }
+
+  .particles {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--gold-light);
+    opacity: 0;
+    animation: float linear infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-50px) translateX(30px); opacity: 0; }
+  }
+
+  /* Layout */
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeDown 1s ease both;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .logo-wrapper {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .logo-ring {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, var(--gold), transparent, var(--gold-light)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    animation: rotateBorder 6s linear infinite;
+  }
+
+  @keyframes rotateBorder {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .logo-img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    box-shadow: 0 0 30px rgba(201,162,39,0.4), 0 0 60px rgba(201,162,39,0.15);
+    display: block;
+  }
+
+  .header-title {
+    font-family: 'Tajawal', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), #fff8dc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+
+  .header-sub {
+    font-size: 1.1rem;
+    color: var(--teal-light);
+    font-weight: 500;
+    letter-spacing: 2px;
+  }
+
+  .divider {
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 18px auto;
+  }
+
+  .campaign-slogan {
+    font-size: 1rem;
+    color: rgba(245,240,232,0.6);
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  /* Sentences Section */
+  .section-label {
+    text-align: center;
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    color: var(--teal-light);
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    opacity: 0;
+    animation: fadeIn 0.8s ease 1.2s both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Sentences grid */
+  .sentences-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 60px;
+  }
+
+  .sentence-card {
+    position: relative;
+    padding: 22px 24px;
+    border-radius: 12px;
+    overflow: hidden;
+    opacity: 0;
+    cursor: default;
+  }
+
+  .sentence-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(10,124,110,0.15), rgba(201,162,39,0.08));
+    border: 1px solid rgba(201,162,39,0.2);
+    border-radius: 12px;
+    transition: all 0.4s ease;
+  }
+
+  .sentence-card:hover::before {
+    background: linear-gradient(135deg, rgba(10,124,110,0.3), rgba(201,162,39,0.15));
+    border-color: rgba(201,162,39,0.5);
+  }
+
+  .sentence-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+  }
+
+  .sentence-card:hover::after {
+    transform: scaleX(1);
+  }
+
+  .sentence-num {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+    display: block;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sentence-text {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sentence-icon {
+    position: absolute;
+    bottom: 12px;
+    left: 16px;
+    font-size: 1.5rem;
+    opacity: 0.15;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .sentence-card:hover .sentence-icon {
+    opacity: 0.35;
+    transform: scale(1.2);
+  }
+
+  /* Animation variants */
+  /* 1. Fade from left */
+  .anim-fade-left { animation: fadeLeft 0.8s ease both; }
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* 2. Fade from right */
+  .anim-fade-right { animation: fadeRight 0.8s ease both; }
+  @keyframes fadeRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* 3. Scale up */
+  .anim-scale { animation: scaleUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+  @keyframes scaleUp {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* 4. Flip in */
+  .anim-flip { animation: flipIn 0.8s ease both; }
+  @keyframes flipIn {
+    from { opacity: 0; transform: rotateY(90deg); }
+    to { opacity: 1; transform: rotateY(0); }
+  }
+
+  /* 5. Slide from bottom */
+  .anim-slide-up { animation: slideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 6. Blur in */
+  .anim-blur { animation: blurIn 1s ease both; }
+  @keyframes blurIn {
+    from { opacity: 0; filter: blur(15px); }
+    to { opacity: 1; filter: blur(0); }
+  }
+
+  /* 7. Typewriter effect via word-by-word */
+  .anim-words .sentence-text span {
+    opacity: 0;
+    animation: wordAppear 0.4s ease both;
+    display: inline-block;
+    margin: 0 2px;
+  }
+
+  @keyframes wordAppear {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 8. Glitch effect */
+  .anim-glitch { animation: glitchIn 0.6s ease both; }
+  @keyframes glitchIn {
+    0% { opacity: 0; transform: translate(-5px, 3px) skewX(5deg); clip-path: inset(30% 0 50% 0); }
+    25% { opacity: 0.7; transform: translate(5px, -3px) skewX(-3deg); clip-path: inset(10% 0 70% 0); }
+    50% { opacity: 0.5; transform: translate(-3px, 0) skewX(2deg); clip-path: inset(60% 0 20% 0); }
+    75% { opacity: 0.9; transform: translate(2px, 2px); clip-path: inset(0); }
+    100% { opacity: 1; transform: translate(0); clip-path: inset(0); }
+  }
+
+  /* 9. Bounce drop */
+  .anim-bounce { animation: bounceIn 0.9s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+  @keyframes bounceIn {
+    0% { opacity: 0; transform: translateY(-60px) rotate(-5deg); }
+    60% { opacity: 1; transform: translateY(10px) rotate(1deg); }
+    80% { transform: translateY(-5px) rotate(-0.5deg); }
+    100% { opacity: 1; transform: translateY(0) rotate(0); }
+  }
+
+  /* 10. Reveal from center */
+  .anim-reveal { animation: revealCenter 0.8s ease both; overflow: hidden; }
+  @keyframes revealCenter {
+    from { opacity: 0; clip-path: inset(0 50% 0 50%); }
+    to { opacity: 1; clip-path: inset(0 0% 0 0%); }
+  }
+
+  /* 11. Rotate in */
+  .anim-rotate { animation: rotateIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+  @keyframes rotateIn {
+    from { opacity: 0; transform: rotate(-15deg) scale(0.8); }
+    to { opacity: 1; transform: rotate(0) scale(1); }
+  }
+
+  /* 12. Neon flicker */
+  .anim-flicker { animation: flickerIn 1s ease both; }
+  @keyframes flickerIn {
+    0% { opacity: 0; }
+    10% { opacity: 0.8; }
+    20% { opacity: 0.1; }
+    30% { opacity: 0.9; }
+    40% { opacity: 0.3; }
+    50% { opacity: 1; }
+    60% { opacity: 0.7; }
+    70% { opacity: 1; }
+    80% { opacity: 0.9; }
+    100% { opacity: 1; }
+  }
+
+  /* 13. Diagonal wipe */
+  .anim-diagonal { animation: diagonalWipe 0.8s ease both; }
+  @keyframes diagonalWipe {
+    from { opacity: 0; transform: translate(-20px, 20px) skewX(-10deg); }
+    to { opacity: 1; transform: translate(0) skewX(0); }
+  }
+
+  /* 14. Split reveal */
+  .anim-split { animation: splitReveal 0.8s ease both; }
+  @keyframes splitReveal {
+    from { opacity: 0; letter-spacing: 20px; transform: scaleX(0.6); }
+    to { opacity: 1; letter-spacing: normal; transform: scaleX(1); }
+  }
+
+  /* 15. Elastic pop */
+  .anim-elastic { animation: elasticPop 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) both; }
+  @keyframes elasticPop {
+    from { opacity: 0; transform: scale(0) rotate(10deg); }
+    to { opacity: 1; transform: scale(1) rotate(0); }
+  }
+
+  /* Card color variants */
+  .card-v1 { background: rgba(10,124,110,0.12); }
+  .card-v2 { background: rgba(201,162,39,0.1); }
+  .card-v3 { background: rgba(18,168,152,0.1); }
+
+  /* Team Section */
+  .team-section {
+    background: linear-gradient(135deg, rgba(10,124,110,0.1), rgba(201,162,39,0.06));
+    border: 1px solid rgba(201,162,39,0.2);
+    border-radius: 20px;
+    padding: 40px;
+    opacity: 0;
+    animation: fadeIn 1s ease 4s both;
+  }
+
+  .team-section-title {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--gold-light);
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 14px;
+  }
+
+  .team-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .supervisors {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+  }
+
+  .supervisor-card {
+    text-align: center;
+    padding: 20px 28px;
+    background: rgba(201,162,39,0.08);
+    border: 1px solid rgba(201,162,39,0.25);
+    border-radius: 14px;
+    min-width: 200px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .supervisor-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(201,162,39,0.2);
+  }
+
+  .supervisor-role {
+    font-size: 0.75rem;
+    color: var(--teal-light);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .supervisor-name {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--gold-light);
+  }
+
+  .students-title {
+    font-size: 0.85rem;
+    color: rgba(245,240,232,0.5);
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .students-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+  }
+
+  .student-item {
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    font-size: 0.88rem;
+    color: rgba(245,240,232,0.8);
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .student-item::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--teal-light);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+  }
+
+  .student-item:hover {
+    background: rgba(10,124,110,0.15);
+    border-color: rgba(18,168,152,0.3);
+    color: var(--white);
+    transform: translateX(-2px);
+  }
+
+  .student-item:hover::before {
+    transform: scaleY(1);
+  }
+
+  .footer-bar {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: rgba(201,162,39,0.3);
+  }
+
+  /* Pulse glow on gold elements */
+  @keyframes pulseGlow {
+    0%, 100% { text-shadow: 0 0 10px rgba(201,162,39,0.3); }
+    50% { text-shadow: 0 0 25px rgba(201,162,39,0.7), 0 0 50px rgba(201,162,39,0.3); }
+  }
+
+  .header-title {
+    animation: pulseGlow 3s ease infinite;
+  }
+
+  /* Floating energy icon */
+  .energy-badge {
+    display: inline-block;
+    font-size: 2.5rem;
+    animation: floatBadge 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(201,162,39,0.5));
+  }
+
+  @keyframes floatBadge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-canvas"></div>
+<div class="particles" id="particles"></div>
+
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-wrapper">
+      <div class="logo-ring"></div>
+      <img class="logo-img" src="/mnt/user-data/uploads/1000178995.jpg" alt="شعار الجامعة" onerror="this.style.display='none'">
+    </div>
+    <div style="margin-bottom:8px;">
+      <span class="energy-badge">⚡</span>
+    </div>
+    <h1 class="header-title">دقيقة الترشيد</h1>
+    <div class="divider"></div>
+    <p class="header-sub">جامعتنا واعية ... طاقتنا أمننا</p>
+    <p class="campaign-slogan" style="margin-top:10px;">كلية العلوم — جامعة مدينة السادات الأهلية</p>
+  </div>
+
+  <!-- Section label -->
+  <p class="section-label">✦ أهمية ترشيد الطاقة ✦</p>
+
+  <!-- 15 Sentences -->
+  <div class="sentences-grid" id="sentencesGrid">
+  </div>
+
+  <!-- Team -->
+  <div class="team-section">
+    <h2 class="team-section-title">✦ فريق النشاط ✦</h2>
+
+    <div class="supervisors">
+      <div class="supervisor-card">
+        <div class="supervisor-role">منسقة النشاط</div>
+        <div class="supervisor-name">دكتورة / علياء</div>
+      </div>
+      <div class="supervisor-card">
+        <div class="supervisor-role">مدير البرامج</div>
+        <div class="supervisor-name">دكتور / خالد الكلاني</div>
+      </div>
+    </div>
+
+    <p class="students-title">⬥ أسماء الطلاب المشاركين ⬥</p>
+
+    <div class="students-grid">
+      <div class="student-item">يارا يوسف البابلي</div>
+      <div class="student-item">يارا مجدي أحمد</div>
+      <div class="student-item">منه سامي عيسى</div>
+      <div class="student-item">حبيبة محمد فتوح</div>
+      <div class="student-item">ياسمين محمود</div>
+      <div class="student-item">سما هشام</div>
+      <div class="student-item">ليلى خالد</div>
+      <div class="student-item">مهرائيل فادي</div>
+      <div class="student-item">عاليا أحمد</div>
+      <div class="student-item">كارين كريم</div>
+      <div class="student-item">شروق سعد الغضابي</div>
+      <div class="student-item">سلمى أحمد رجب</div>
+      <div class="student-item">آية جمال راضي</div>
+      <div class="student-item">نوران أشرف</div>
+      <div class="student-item">منة الله شبل</div>
+      <div class="student-item">سارة وائل بسيوني</div>
+      <div class="student-item">شهد محمد عبدالفضيل</div>
+      <div class="student-item">هاجر محمد حنفي</div>
+      <div class="student-item">معتز علام علي</div>
+      <div class="student-item">حمزة السيد ناشي</div>
+    </div>
+  </div>
+
+  <div class="footer-bar">NUSC · كلية العلوم · حملة ترشيد الطاقة ⚡</div>
+</div>
+
+<script>
+// Generate particles
+const particlesContainer = document.getElementById('particles');
+for (let i = 0; i < 25; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.left = Math.random() * 100 + '%';
+  p.style.width = (Math.random() * 3 + 1) + 'px';
+  p.style.height = p.style.width;
+  p.style.animationDuration = (Math.random() * 10 + 8) + 's';
+  p.style.animationDelay = (Math.random() * 10) + 's';
+  p.style.opacity = Math.random() * 0.5;
+  particlesContainer.appendChild(p);
+}
+
+// Sentences data
+const sentences = [
+  { text: "ترشيد الطاقة يُقلل الفواتير ويوفر المال لمشاريع أهم.", icon: "💰", anim: "anim-fade-left", variant: "card-v1" },
+  { text: "إطفاء الأنوار عند الخروج عادةٌ صغيرة بأثر عظيم.", icon: "💡", anim: "anim-fade-right", variant: "card-v2" },
+  { text: "ترشيد الطاقة يحمي كوكبنا من الاحترار العالمي.", icon: "🌍", anim: "anim-scale", variant: "card-v3" },
+  { text: "الجامعة التي توفر الطاقة تستثمر في مستقبل طلابها.", icon: "🏫", anim: "anim-bounce", variant: "card-v1" },
+  { text: "كل كيلوواط توفره يُسهم في تقليل انبعاثات الكربون.", icon: "🌿", anim: "anim-blur", variant: "card-v2" },
+  { text: "الطاقة الموفرة اليوم تُضاء بها مدارس الغد.", icon: "🔋", anim: "anim-glitch", variant: "card-v3" },
+  { text: "ضبط درجة التكييف على 24°م يوفر نصف استهلاك التبريد.", icon: "❄️", anim: "anim-words", variant: "card-v1" },
+  { text: "أجهزة التكنولوجيا الموفرة للطاقة تُعمر أطول وتكلف أقل.", icon: "💻", anim: "anim-flip", variant: "card-v2" },
+  { text: "الوعي بالطاقة مسؤولية وطنية يبدأ بها كل فرد.", icon: "🇪🇬", anim: "anim-rotate", variant: "card-v3" },
+  { text: "استخدام الإضاءة الطبيعية يُغني عن الكهرباء ويُصح البصر.", icon: "☀️", anim: "anim-slide-up", variant: "card-v1" },
+  { text: "فصل الأجهزة عن الكهرباء كليًا يوقف الاستهلاك الخفي.", icon: "🔌", anim: "anim-flicker", variant: "card-v2" },
+  { text: "الترشيد ليس تقشفًا، بل هو ذكاء في إدارة الموارد.", icon: "🧠", anim: "anim-diagonal", variant: "card-v3" },
+  { text: "طالب العلم الواعي يُعلم أسرته فضائل توفير الطاقة.", icon: "👨‍👩‍👧", anim: "anim-split", variant: "card-v1" },
+  { text: "الطاقة المتجددة تبدأ بترشيد ما لدينا قبل إنتاج الجديد.", icon: "⚡", anim: "anim-reveal", variant: "card-v2" },
+  { text: "معًا نبني جامعةً مستدامة تُضيء الحاضر وتصون المستقبل.", icon: "🤝", anim: "anim-elastic", variant: "card-v3" },
+];
+
+const grid = document.getElementById('sentencesGrid');
+
+sentences.forEach((s, i) => {
+  const card = document.createElement('div');
+  card.className = `sentence-card ${s.anim} ${s.variant}`;
+  card.style.animationDelay = (1.5 + i * 0.15) + 's';
+
+  let textContent = s.text;
+
+  // For word-by-word animation
+  if (s.anim === 'anim-words') {
+    const words = s.text.split(' ');
+    textContent = words.map((w, wi) =>
+      `<span style="animation-delay:${(1.5 + i * 0.15) + 0.1 + wi * 0.1}s">${w}</span>`
+    ).join(' ');
+  }
+
+  const num = String(i + 1).padStart(2, '0');
+  card.innerHTML = `
+    <span class="sentence-num">◆ ${num}</span>
+    <p class="sentence-text">${textContent}</p>
+    <div class="sentence-icon">${s.icon}</div>
+  `;
+  grid.appendChild(card);
+});
+</script>
+</body>
+</html>
