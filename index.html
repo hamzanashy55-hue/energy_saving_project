@@ -217,6 +217,51 @@
     font-size: 0.8rem;
     color: rgba(201,162,39,0.5);
   }
+  
+  /* التعديل الخاص بالموبايل */
+  @media (max-width: 768px) {
+    .wrapper {
+      padding: 20px 10px; /* تقليل المسافات الجانبية */
+    }
+
+    .header-title {
+      font-size: 2rem; /* تصغير حجم العنوان */
+    }
+
+    .slider-container {
+      max-width: 95%; /* الكارت ياخد عرض الشاشة كلها تقريباً */
+      margin: 20px auto;
+    }
+
+    .sentence-card {
+      min-height: 220px;
+      padding: 25px 20px; /* تقليل الحشو الداخلي */
+      border-radius: 20px;
+    }
+
+    .sentence-text {
+      font-size: 1.2rem !important; /* تصغير الخط عشان ميبقاش طويل وعريض */
+      margin: 15px 0;
+    }
+
+    .sentence-icon {
+      font-size: 3rem !important; /* تصغير الأيقونة شوية */
+    }
+
+    .next-btn {
+      width: 100%; /* الزرار يبقى بعرض الكارت لسهولة الضغط */
+      padding: 12px;
+      font-size: 1.1rem;
+    }
+
+    .team-section {
+      padding: 20px;
+    }
+
+    .students-grid {
+      grid-template-columns: repeat(2, 1fr); /* الأسماء تظهر في عمودين بدل ما تبقى زحمة */
+    }
+  }
 </style>
 </head>
 <body>
