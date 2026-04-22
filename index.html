@@ -6,6 +6,27 @@
 <title>دقيقة الترشيد - جامعة مدينة السادات الأهلية</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
+.student-item {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background: rgba(6, 19, 15, 0.6) !important; /* تفتيح بسيط للخلفية عشان النور يبان */
+}
+
+.student-item::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: conic-gradient(transparent, transparent, var(--gold), transparent);
+    animation: rotateGlow 4s linear infinite;
+    z-index: -1;
+    opacity: 0.4; /* تقليل السطوع عشان الكلام يفضل واضح */
+}
+@keyframes rotateGlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
   .university-badge {
     position: fixed;
     bottom: 20px;
@@ -525,6 +546,11 @@
   </div>
 </div>
 <script>
+  document.addEventListener('mousemove', (e) => {
+    const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+    const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+    document.body.style.backgroundPosition = `${50 + moveX}% ${50 + moveY}%`;
+});
 // الجزيئات المتطايرة
 const particlesContainer = document.getElementById('particles');
 for (let i = 0; i < 25; i++) {
