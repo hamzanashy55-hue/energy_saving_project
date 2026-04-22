@@ -546,99 +546,117 @@
   </div>
 </div>
 <script>
+  // 1. حركة الخلفية مع الماوس
   document.addEventListener('mousemove', (e) => {
     const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
     const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
     document.body.style.backgroundPosition = `${50 + moveX}% ${50 + moveY}%`;
-});
-// الجزيئات المتطايرة
-const particlesContainer = document.getElementById('particles');
-for (let i = 0; i < 25; i++) {
-  const p = document.createElement('div');
-  p.className = 'particle';
-  p.style.left = Math.random() * 100 + '%';
-  p.style.animationDuration = (Math.random() * 10 + 8) + 's';
-  p.style.animationDelay = (Math.random() * 10) + 's';
-  particlesContainer.appendChild(p);
-}
+  });
 
-// البيانات
-const sentences = [
-  { text: "الترشيد مش تقشف.. ده ذكاء في إدارة مواردك.", icon: "🧠" },
-  { text: "بصمة وعيك بتبدأ بلمسة.. اطفي النور وأنت خارج.", icon: "💡" },
-  { text: "استثمر في التكنولوجيا الموفرة؛ بتعيش أكتر وتصرف أقل.", icon: "💻" },
-  { text: "هدية للأجيال اللي جاية: حافظ على كل كيلو وات اليوم.", icon: "🎁" },
-  { text: "احذر 'الطاقة الشبحية'.. افصل الشاحن فور انتهاء الاستخدام.", icon: "🔌" },
-  { text: "عقل واعي + بيت ذكي = استهلاك مثالي.", icon: "🏠" },
-  { text: "نور الشمس ببلاش.. استخدم الإضاءة الطبيعية لتركيز أعلى.", icon: "☀️" },
-  { text: "خليك على الـ 24.. سر توفير نص استهلاك التكييف.", icon: "❄️" },
-  { text: "كن القدوة.. انشر ثقافة 'الوعي الأخضر' في عائلتك.", icon: "🌿" },
-  { text: "الطاقة اللي بنوفرها هي أنظف طاقة بننتجها.", icon: "🍃" },
-  { text: "الحفاظ على موارد الدولة.. هو قمة الانتماء الوطني.", icon: "🇪🇬" },
-  { text: "وفر النهاردة.. عشان تلاقي النور بكرة.", icon: "✨" },
-  { text: "معاً نبني جامعةً مستدامة تصون المستقبل.", icon: "🤝" }
-];
-  
-let currentIndex = 0;
+  // 2. الجزيئات المتطايرة
+  const particlesContainer = document.getElementById('particles');
+  for (let i = 0; i < 25; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (Math.random() * 10 + 8) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    particlesContainer.appendChild(p);
+  }
 
-function updateCard() {
-  const s = sentences[currentIndex];
-  const container = document.getElementById('activeSentence');
-  const num = String(currentIndex + 1).padStart(2, '0');
-  
-  // بنحدث الكارت أولاً
-  container.innerHTML = `
-    <div class="sentence-card">
-      <span class="sentence-num">✦ نصيحة رقم ${num} ✦</span>
-      <p class="sentence-text">${s.text}</p>
-      <div class="sentence-icon">${s.icon}</div>
-    </div>
-  `;
+  // 3. البيانات
+  const sentences = [
+    { text: "الترشيد مش تقشف.. ده ذكاء في إدارة مواردك.", icon: "🧠" },
+    { text: "بصمة وعيك بتبدأ بلمسة.. اطفي النور وأنت خارج.", icon: "💡" },
+    { text: "استثمر في التكنولوجيا الموفرة؛ بتعيش أكتر وتصرف أقل.", icon: "💻" },
+    { text: "هدية للأجيال اللي جاية: حافظ على كل كيلو وات اليوم.", icon: "🎁" },
+    { text: "احذر 'الطاقة الشبحية'.. افصل الشاحن فور انتهاء الاستخدام.", icon: "🔌" },
+    { text: "عقل واعي + بيت ذكي = استهلاك مثالي.", icon: "🏠" },
+    { text: "نور الشمس ببلاش.. استخدم الإضاءة الطبيعية لتركيز أعلى.", icon: "☀️" },
+    { text: "خليك على الـ 24.. سر توفير نص استهلاك التكييف.", icon: "❄️" },
+    { text: "كن القدوة.. انشر ثقافة 'الوعي الأخضر' في عائلتك.", icon: "🌿" },
+    { text: "الطاقة اللي بنوفرها هي أنظف طاقة بننتجها.", icon: "🍃" },
+    { text: "الحفاظ على موارد الدولة.. هو قمة الانتماء الوطني.", icon: "🇪🇬" },
+    { text: "وفر النهاردة.. عشان تلاقي النور بكرة.", icon: "✨" },
+    { text: "معاً نبني جامعةً مستدامة تصون المستقبل.", icon: "🤝" }
+  ];
 
-  // بعدين بنعدل الزرار (ده لازم يكون بره الـ innerHTML)
-function showNext() {
+  let currentIndex = 0;
+
+  // 4. تحديث الكارت والزرار
+  function updateCard() {
+    const s = sentences[currentIndex];
+    const container = document.getElementById('activeSentence');
+    const num = String(currentIndex + 1).padStart(2, '0');
+
+    container.innerHTML = `
+      <div class="sentence-card">
+        <span class="sentence-num">✦ نصيحة رقم ${num} ✦</span>
+        <p class="sentence-text">${s.text}</p>
+        <div class="sentence-icon">${s.icon}</div>
+      </div>
+    `;
+
+    const nextBtn = document.querySelector('.next-btn');
     if (currentIndex === sentences.length - 1) {
-        const thankYou = document.getElementById('thankYouScreen');
-        thankYou.style.display = 'flex';
-        setTimeout(() => { thankYou.style.opacity = '1'; }, 50);
-        return;
+      nextBtn.innerHTML = "إنهاء الجولة 🏁";
+      nextBtn.style.background = "linear-gradient(135deg, #12a898, #0a7c6e)";
+    } else {
+      nextBtn.innerHTML = "النصيحة التالية ✦";
+      nextBtn.style.background = "linear-gradient(135deg, var(--gold), var(--gold-dark))";
+    }
+  }
+
+  // 5. وظيفة الزرار التالي
+  function showNext() {
+    if (currentIndex === sentences.length - 1) {
+      const thankYou = document.getElementById('thankYouScreen');
+      thankYou.style.display = 'flex';
+      setTimeout(() => { thankYou.style.opacity = '1'; }, 50);
+      return;
     }
 
     const container = document.getElementById('activeSentence');
     const card = container.querySelector('.sentence-card');
     card.style.transform = "rotateX(90deg)";
     card.style.opacity = "0";
-    
-    setTimeout(() => {
-        currentIndex = (currentIndex + 1) % sentences.length;
-        updateCard();
-        
-        const newCard = document.getElementById('activeSentence').querySelector('.sentence-card');
-        newCard.style.transition = "none"; 
-        newCard.style.transform = "rotateX(-90deg)";
-        newCard.style.opacity = "0";
-        
-        setTimeout(() => {
-            newCard.style.transition = "all 0.4s ease-out";
-            newCard.style.transform = "rotateX(0deg)";
-            newCard.style.opacity = "1";
-        }, 50);
-    }, 400);
-}
 
-// عرض أول كارت عند التحميل
-updateCard();
-  // تشغيل الانيميشن عند فتح الصفحة
-window.addEventListener('load', () => {
-  const loader = document.getElementById('loader');
-  
-  // بعد 3 ثواني (مدة الانيميشن) بنشيل الـ loader ونظهر الموقع
-  setTimeout(() => {
-    loader.style.opacity = '0';
-    loader.style.visibility = 'hidden';
-    document.body.classList.add('show-content');
-  }, 3000);
-});
+    setTimeout(() => {
+      currentIndex = (currentIndex + 1) % sentences.length;
+      updateCard();
+
+      const newCard = document.getElementById('activeSentence').querySelector('.sentence-card');
+      newCard.style.transition = "none";
+      newCard.style.transform = "rotateX(-90deg)";
+      newCard.style.opacity = "0";
+
+      setTimeout(() => {
+        newCard.style.transition = "all 0.4s ease-out";
+        newCard.style.transform = "rotateX(0deg)";
+        newCard.style.opacity = "1";
+      }, 50);
+    }, 400);
+  }
+
+  // 6. وظيفة إعادة الجولة
+  function restartTour() {
+    location.reload();
+  }
+
+  // تشغيل أول كارت
+  updateCard();
+
+  // Loader
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    setTimeout(() => {
+      loader.style.opacity = '0';
+      loader.style.visibility = 'hidden';
+      document.body.classList.add('show-content');
+    }, 3000);
+  });
+
+  // شرارات الماوس
   document.addEventListener('mousemove', (e) => {
     const spark = document.createElement('div');
     spark.className = 'mouse-spark';
@@ -646,8 +664,9 @@ window.addEventListener('load', () => {
     spark.style.top = e.pageY + 'px';
     document.body.appendChild(spark);
     setTimeout(() => spark.remove(), 1000);
-});
+  });
 </script>
+
 <div id="thankYouScreen" style="position: fixed; inset: 0; background: #000; display: none; justify-content: center; align-items: center; z-index: 10000; text-align: center; opacity: 0; transition: opacity 1s ease;">
     <div class="thank-you-content">
         <h2 style="color: var(--gold); font-size: clamp(1.5rem, 5vw, 3rem); font-family: 'Tajawal'; margin-bottom: 20px;">شكراً لكم</h2>
@@ -657,7 +676,7 @@ window.addEventListener('load', () => {
             <img src="logo.jpg" style="width: 100px; height: 100px; border-radius: 50%; border: 2px solid var(--gold); padding: 5px;">
         </div>
 
-        <button onclick="restartTour()" class="restart-btn">
+        <button onclick="restartTour()" class="restart-btn" style="margin-top: 25px; background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 25px; border-radius: 25px; cursor: pointer; font-family: 'Cairo'; font-weight: bold;">
             إعادة الجولة ↺
         </button>
 
