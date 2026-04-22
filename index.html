@@ -586,17 +586,24 @@ function updateCard() {
   const container = document.getElementById('activeSentence');
   const num = String(currentIndex + 1).padStart(2, '0');
   
+  // بنحدث الكارت أولاً
   container.innerHTML = `
     <div class="sentence-card">
       <span class="sentence-num">✦ نصيحة رقم ${num} ✦</span>
       <p class="sentence-text">${s.text}</p>
       <div class="sentence-icon">${s.icon}</div>
     </div>
-    const nextBtn = document.querySelector('.next-btn');
-    if (currentIndex === sentences.length - 1) {
-        nextBtn.innerHTML = "إنهاء الجولة 🏁";
-        nextBtn.style.background = "linear-gradient(135deg, #12a898, #0a7c6e)"; // لون أخضر للنهاية
   `;
+
+  // بعدين بنعدل الزرار (ده لازم يكون بره الـ innerHTML)
+  const nextBtn = document.querySelector('.next-btn');
+  if (currentIndex === sentences.length - 1) {
+      nextBtn.innerHTML = "إنهاء الجولة 🏁";
+      nextBtn.style.background = "linear-gradient(135deg, #12a898, #0a7c6e)"; 
+  } else {
+      nextBtn.innerHTML = "النصيحة التالية ✦";
+      nextBtn.style.background = "linear-gradient(135deg, var(--gold), var(--gold-dark))";
+  }
 }
 function showNext() {
     // لو إحنا في آخر نصيحة (رقم 13)
