@@ -191,6 +191,8 @@
     padding: 50px;
     box-shadow: 0 25px 60px rgba(0,0,0,0.5);
     animation: cardEntrance 0.7s cubic-bezier(0.17, 0.67, 0.83, 0.67) both;
+    transition: all 0.4s ease; /* ضيف ده */
+    transform-style: preserve-3d; /* وضيف ده */
   }
 
   @keyframes cardEntrance {
@@ -413,11 +415,6 @@
         </div>
         
     </div>
-
-    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(201,162,39,0.2); text-align: center;">
-        <p style="font-size: 1.1rem; color: var(--teal-light); font-weight: bold; margin-bottom: 8px;">مدير البرامج: دكتور / خالد الكلاني</p>
-        <p style="font-size: 1.1rem; color: var(--teal-light); font-weight: bold;">منسقة النشاط: دكتورة / علياء</p>
-    </div>
 </div>
     
   </div> <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; margin-top: 50px; padding: 20px 0; border-top: 1px solid rgba(201,162,39,0.2); clear: both;">
@@ -476,10 +473,33 @@ function updateCard() {
     </div>
   `;
 }
-
 function showNext() {
-  currentIndex = (currentIndex + 1) % sentences.length;
-  updateCard();
+  const container = document.getElementById('activeSentence');
+  const card = container.querySelector('.sentence-card');
+  
+  // 1. الكارت يميل ويختفي (الحركة بتبدأ هنا)
+  card.style.transform = "rotateX(90deg)";
+  card.style.opacity = "0";
+  
+  setTimeout(() => {
+    // 2. بنغير النص وهو الكارت "واقف" بالعرض فمش بيبان التغيير المفاجئ
+    currentIndex = (currentIndex + 1) % sentences.length;
+    updateCard();
+    
+    // 3. بنجيب الكارت الجديد ونجهزه مائل عشان يعدل نفسه
+    const newCard = document.getElementById('activeSentence').querySelector('.sentence-card');
+    newCard.style.transition = "none"; 
+    newCard.style.transform = "rotateX(-90deg)";
+    newCard.style.opacity = "0";
+    
+    setTimeout(() => {
+      // 4. الكارت يرجع لوضعه الطبيعي (الحركة بتخلص هنا)
+      newCard.style.transition = "all 0.4s ease-out";
+      newCard.style.transform = "rotateX(0deg)";
+      newCard.style.opacity = "1";
+    }, 50);
+    
+  }, 400); // 400 مللي ثانية هي مدة النص الأول من الحركة
 }
 
 // عرض أول كارت عند التحميل
