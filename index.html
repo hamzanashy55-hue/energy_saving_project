@@ -15,7 +15,16 @@
     --dark: #06130f;
     --white: #f5f0e8;
   }
+@keyframes titleGlow {
+  0% { text-shadow: 0 0 0px var(--gold); opacity: 0; }
+  50% { text-shadow: 0 0 40px var(--gold-light); opacity: 0.8; }
+  100% { text-shadow: 0 0 15px rgba(201,162,39,0.3); opacity: 1; }
+}
 
+.header-title {
+  animation: titleGlow 2s ease-out forwards, pulseGlow 3s ease infinite;
+}
+  
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
@@ -285,30 +294,18 @@
   <div class="team-section">
     <h2 style="text-align:center; color:var(--gold); margin-bottom:20px;">✦ فريق النشاط ✦</h2>
     <div class="students-grid">
-      <div class="student-item">يارا يوسف البابلي</div>
-      <div class="student-item">يارا مجدي أحمد</div>
-      <div class="student-item">منه سامي عيسى</div>
-      <div class="student-item">حبيبة محمد فتوح</div>
-      <div class="student-item">ياسمين محمود</div>
-      <div class="student-item">سما هشام</div>
-      <div class="student-item">ليلى خالد</div>
-      <div class="student-item">مهرائيل فادي</div>
-      <div class="student-item">عاليا أحمد</div>
-      <div class="student-item">كارين كريم</div>
-      <div class="student-item">شروق سعد الغضابي</div>
-      <div class="student-item">سلمى أحمد رجب</div>
-      <div class="student-item">آية جمال راضي</div>
-      <div class="student-item">نوران أشرف</div>
-      <div class="student-item">منة الله عبدلله</div>
-      <div class="student-item">سارة وائل بسيوني</div>
-      <div class="student-item">شهد محمد عبدالفضيل</div>
-      <div class="student-item">هاجر محمد حنفي</div>
-      <div class="student-item">معتز علام علي</div>
-      <div class="student-item" style="border:1px solid var(--gold)">حمزة السيد ناشي</div>
+      <div class="students-grid" style="grid-template-columns: 1fr 1fr; max-width: 500px; margin: 20px auto;">
+  <div class="student-item" style="border: 1.5px solid var(--gold); padding: 15px; font-weight: bold; font-size: 1.1rem;">
+    ⭐ الاسم الأول هنا
+  </div>
+  <div class="student-item" style="border: 1.5px solid var(--gold); padding: 15px; font-weight: bold; font-size: 1.1rem;">
+    ⭐ الاسم الثاني هنا
+  </div>
+</div>
     
   </div> <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; margin-top: 50px; padding: 20px 0; border-top: 1px solid rgba(201,162,39,0.2); clear: both;">
-        <p style="font-size: 1rem; color: #12a898; font-weight: bold; margin: 5px 0; text-align: center;">منسقة النشاط: دكتورة / علياء</p>
         <p style="font-size: 1rem; color: #12a898; font-weight: bold; margin: 5px 0; text-align: center;">مدير البرامج: دكتور / خالد الكلاني</p>
+        <p style="font-size: 1rem; color: #12a898; font-weight: bold; margin: 5px 0; text-align: center;">منسقة النشاط: دكتورة / علياء</p>
     </div>
     </div>
   </div>
