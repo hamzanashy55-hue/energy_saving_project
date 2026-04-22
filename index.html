@@ -317,6 +317,60 @@
       grid-template-columns: repeat(2, 1fr); /* الأسماء تظهر في عمودين بدل ما تبقى زحمة */
     }
   }
+  /* تأثير احترافي لأسماء الطلاب عند مرور الماوس (Neon Glow) */
+.student-item {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(201, 162, 39, 0.3) !important;
+}
+
+.student-item:hover {
+  transform: scale(1.08) translateY(-5px);
+  background: rgba(201, 162, 39, 0.15) !important;
+  box-shadow: 0 0 20px rgba(201, 162, 39, 0.4);
+  border-color: var(--gold-light) !important;
+  color: var(--gold-light);
+}
+
+/* أنيميشن تبديل الكروت (3D Flip Effect) */
+.sentence-card {
+  transition: all 0.5s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.card-flip {
+  transform: rotateX(90deg) scale(0.8);
+  opacity: 0;
+}
+
+/* أنيميشن الأيقونات الطائرة داخل الكارت */
+.sentence-icon {
+  display: inline-block;
+  animation: floatingIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatingIcon {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(10deg); }
+}
+
+/* وهج متحرك خلفي للموقع (Animated Background Glow) */
+.bg-canvas::after {
+  content: '';
+  position: fixed;
+  top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(201,162,39,0.06) 0%, transparent 50%);
+  animation: bgRotate 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes bgRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 </style>
 </head>
 <body>
