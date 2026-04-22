@@ -6,6 +6,60 @@
 <title>دقيقة الترشيد - جامعة مدينة السادات الأهلية</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
+  /* شاشة التحميل (Splash Screen) */
+#loader {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(6, 19, 15, 0.9); /* خلفية داكنة شفافة */
+  backdrop-filter: blur(20px); /* تأثير الضبابية */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* عشان يغطي كل حاجة */
+  transition: opacity 1s ease-out, visibility 1s;
+}
+
+.loader-content {
+  text-align: center;
+}
+
+.loader-text {
+  font-family: 'Tajawal', sans-serif;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 800;
+  color: var(--gold);
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: splashFade 2.5s ease-in-out forwards;
+}
+
+.loader-divider {
+  color: var(--white);
+  font-size: 2rem;
+  margin: 0 15px;
+  opacity: 0;
+  animation: splashFade 2.5s ease-in-out 0.3s forwards;
+}
+
+@keyframes splashFade {
+  0% { opacity: 0; transform: translateY(20px) scale(0.9); filter: blur(10px); }
+  30% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  70% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  100% { opacity: 0; transform: translateY(-20px) scale(1.1); filter: blur(10px); }
+}
+
+/* إخفاء المحتوى الأصلي مؤقتاً */
+.wrapper {
+  opacity: 0;
+  transition: opacity 1s ease-in;
+}
+
+.show-content .wrapper {
+  opacity: 1;
+}
   :root {
     --gold: #c9a227;
     --gold-light: #f0c040;
@@ -376,7 +430,13 @@
 </style>
 </head>
 <body>
-
+<div id="loader">
+  <div class="loader-content">
+    <span class="loader-text">جامعتنا واعية</span>
+    <span class="loader-divider">...</span>
+    <span class="loader-text">طاقتنا أمننا</span>
+  </div>
+</div>
 <div class="bg-canvas"></div>
 <div class="particles" id="particles"></div>
 
@@ -504,6 +564,17 @@ function showNext() {
 
 // عرض أول كارت عند التحميل
 updateCard();
+  // تشغيل الانيميشن عند فتح الصفحة
+window.addEventListener('load', () => {
+  const loader = document.getElementById('loader');
+  
+  // بعد 3 ثواني (مدة الانيميشن) بنشيل الـ loader ونظهر الموقع
+  setTimeout(() => {
+    loader.style.opacity = '0';
+    loader.style.visibility = 'hidden';
+    document.body.classList.add('show-content');
+  }, 3000);
+});
 </script>
 </body>
 </html>
