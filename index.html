@@ -24,7 +24,48 @@
 .header-title {
   animation: titleGlow 2s ease-out forwards, pulseGlow 3s ease infinite;
 }
-  
+  /* 1. حركة الأيقونة داخل الكارت */
+.sentence-icon {
+  font-size: 5rem;
+  display: inline-block;
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* 2. تأثير احترافي لأسماء الطلاب عند مرور الماوس */
+.student-item {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: default;
+}
+
+.student-item:hover {
+  transform: scale(1.1) translateY(-5px);
+  background: rgba(201, 162, 39, 0.2) !important;
+  box-shadow: 0 10px 20px rgba(201, 162, 39, 0.3);
+  border-color: var(--gold-light) !important;
+}
+
+/* 3. إضافة "وهج" خلفي للموقع بالكامل */
+.bg-canvas::after {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(201,162,39,0.05) 0%, transparent 50%);
+  animation: rotateBg 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotateBg {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
@@ -296,14 +337,33 @@
     <button class="next-btn" onclick="showNext()">النصيحة التالية ✦</button>
   </div>
 
-  <div class="team-section">
-    <h2 style="text-align:center; color:var(--gold); margin-bottom:20px;">✦ فريق النشاط ✦</h2>
-      <div class="students-grid" style="grid-template-columns: 1fr 1fr; max-width: 500px; margin: 20px auto;">
-  <div class="student-item" style="border: 1.5px solid var(--gold); padding: 15px; font-weight: bold; font-size: 1.1rem;">
-    ⭐محممد عبد الحميد سليمه
-  </div>
-  <div class="student-item" style="border: 1.5px solid var(--gold); padding: 15px; font-weight: bold; font-size: 1.1rem;">
-   ⭐شهاب هاني
+<div class="team-section">
+    <h2 style="text-align:center; color:var(--gold); margin-bottom:25px; font-family:'Tajawal'; letter-spacing: 1px;">✦ فريق العمل المبدع ✦</h2>
+    
+    <div class="students-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 650px; margin: 0 auto;">
+        
+        <div class="student-item" style="border: 2px solid var(--gold); padding: 15px; font-weight: 800; font-size: 1.1rem; border-radius: 15px; background: rgba(255,255,255,0.03); color: var(--white);">
+          👨‍💻 محمد عبد الحميد سليمه
+        </div>
+        
+        <div class="student-item" style="border: 2px solid var(--gold); padding: 15px; font-weight: 800; font-size: 1.1rem; border-radius: 15px; background: rgba(255,255,255,0.03); color: var(--white);">
+          👨‍💻 حمزة السيد ناشي
+        </div>
+        
+        <div class="student-item" style="border: 2px solid var(--gold); padding: 15px; font-weight: 800; font-size: 1.1rem; border-radius: 15px; background: rgba(255,255,255,0.03); color: var(--white);">
+          👨‍💻 شهاب هاني شاهين
+        </div>
+        
+        <div class="student-item" style="border: 2px solid var(--gold); padding: 15px; font-weight: 800; font-size: 1.1rem; border-radius: 15px; background: rgba(255,255,255,0.03); color: var(--white);">
+          👨‍💻 مصعب احمد ابو حديد
+        </div>
+        
+    </div>
+
+    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(201,162,39,0.2); text-align: center;">
+        <p style="font-size: 1.1rem; color: var(--teal-light); font-weight: bold; margin-bottom: 8px;">مدير البرامج: دكتور / خالد الكلاني</p>
+        <p style="font-size: 1.1rem; color: var(--teal-light); font-weight: bold;">منسقة النشاط: دكتورة / علياء</p>
+    </div>
 </div>
     
   </div> <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; margin-top: 50px; padding: 20px 0; border-top: 1px solid rgba(201,162,39,0.2); clear: both;">
