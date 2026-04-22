@@ -188,8 +188,13 @@
     cursor: pointer;
     transition: 0.3s all ease;
     box-shadow: 0 15px 25px rgba(201, 162, 39, 0.4);
+    animation: buttonPulse 2s infinite;
   }
-
+@keyframes buttonPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(201, 162, 39, 0.7); }
+  100% { transform: scale(1); }
+}
   .next-btn:hover {
     transform: translateY(-5px) scale(1.05);
     box-shadow: 0 20px 35px rgba(201, 162, 39, 0.6);
@@ -293,7 +298,6 @@
 
   <div class="team-section">
     <h2 style="text-align:center; color:var(--gold); margin-bottom:20px;">✦ فريق النشاط ✦</h2>
-    <div class="students-grid">
       <div class="students-grid" style="grid-template-columns: 1fr 1fr; max-width: 500px; margin: 20px auto;">
   <div class="student-item" style="border: 1.5px solid var(--gold); padding: 15px; font-weight: bold; font-size: 1.1rem;">
     ⭐ الاسم الأول هنا
